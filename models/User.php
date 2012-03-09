@@ -44,7 +44,9 @@ class User extends Aware {
 	{
 		if (substr($name, 0, 4)=='all_') {
 			$class = Str::singular(substr($name,4));
-			$return = $this->data()->where('class','=',$class);
+			$dclass = 'Data_'.$class;
+
+			$return = $dclass::where('user_id','=',$this->id)->where('class','=',$class);
 
 			if (count($arguments)) {
 				$type = $arguments[0];
